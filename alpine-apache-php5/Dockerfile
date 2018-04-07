@@ -31,6 +31,7 @@ RUN apk add --no-cache \
     php5-phar \
     php5-xml \
     php5-zlib \
+    shadow \
     && mkdir -p /run/apache2 /opt/utils/ \
     && ln -sf /usr/bin/php5 /usr/local/bin/php \
     && curl -sS https://getcomposer.org/installer | /usr/bin/php5 -- --install-dir=/usr/local/bin --filename=composer \

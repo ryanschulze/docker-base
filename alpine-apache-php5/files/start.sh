@@ -22,6 +22,10 @@ EOD
 sed -ie "${sedscript}" /etc/apache2/httpd.conf
 printf "\n<Directory \"/app${WEBAPP_ROOT}\">\n\tAllowOverride All\n</Directory>\nServerName localhost\n" >> /etc/apache2/httpd.conf
 
+if [[ "${WEBSERVER_UID}" != '' ]]; then
+	usermod -u ${WEBSERVER_UID} apache
+fi
+
 # execute any pre-exec scripts, useful for images based on this image
 for file in /opt/utils/pre-exec.d/*sh; do
 	if [[ -e "${file}" ]]; then
