@@ -1,17 +1,20 @@
 FROM alpine:3.7
 LABEL maintainer="Ryan Schulze - https://github.com/ryanschulze"
-LABEL description="A basic apache/php5 image using alpine:latest"
+LABEL description="A basic apache/php5 image using alpine 3.7"
 
 # env variables required during build / start
 ENV APP_PORT=80 \
     WEBAPP_ROOT=
 
+# make sure apk-tools is up-to-date
 # php5-iconv requires gnu-libconv
-RUN apk add --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/testing gnu-libiconv
+RUN apk add --no-cache --upgrade apk-tools && \
+    apk add --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/testing gnu-libiconv
 ENV LD_PRELOAD /usr/lib/preloadable_libiconv.so
 
-RUN apk --no-cache --update add \
+RUN apk add --no-cache --update \
     apache2 \
+    bash \
     curl \
     php5-apache2 \
     php5-cli \
@@ -27,16 +30,18 @@ RUN apk --no-cache --update add \
     php5-pdo_mysql \
     php5-phar \
     php5-xml \
-    && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
-    && mkdir /run/apache2 /opt/utils/ \
-    && echo '[i] Success 1/2'
+    php5-zlib \
+    && mkdir -p /run/apache2 /opt/utils/ \
+    && ln -sf /usr/bin/php5 /usr/local/bin/php \
+    && curl -sS https://getcomposer.org/installer | /usr/bin/php5 -- --install-dir=/usr/local/bin --filename=composer \
+    && echo '[i] Setup 1/2'
 
 COPY files/start.sh /opt/utils/
 
 RUN mkdir -p /opt/utils/pre-init.d /opt/utils/pre-exec.d /app && \
     chmod -R 755 /opt/utils/ /app && \
     chown -R apache:apache /app && \
-    echo '[i] Success 2/2'
+    echo '[i] Setup 2/2'
 
 EXPOSE $APP_PORT
 

@@ -20,7 +20,7 @@ s@/var/www/localhost/htdocs@/app/$WEBAPP_ROOT@
 EOD
 
 sed -ie "${sedscript}" /etc/apache2/httpd.conf
-printf "\n<Directory \"/app${WEBAPP_ROOT}\">\n\tAllowOverride All\n</Directory>\n" >> /etc/apache2/httpd.conf
+printf "\n<Directory \"/app${WEBAPP_ROOT}\">\n\tAllowOverride All\n</Directory>\nServerName localhost\n" >> /etc/apache2/httpd.conf
 
 # execute any pre-exec scripts, useful for images based on this image
 for file in /opt/utils/pre-exec.d/*sh; do
