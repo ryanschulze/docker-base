@@ -12,7 +12,7 @@ RUN apk add --no-cache --upgrade apk-tools && \
     apk add --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/testing gnu-libiconv
 ENV LD_PRELOAD /usr/lib/preloadable_libiconv.so
 
-RUN apk add --no-cache --update \
+RUN apk add --no-cache \
     apache2 \
     bash \
     curl \
