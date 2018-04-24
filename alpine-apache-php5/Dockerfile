@@ -38,10 +38,10 @@ RUN apk --no-cache --update upgrade && \
     && mkdir -p /run/apache2 /opt/utils/ \
     && ln -sf /usr/bin/php5 /usr/local/bin/php \
     && curl -sS https://getcomposer.org/installer | /usr/bin/php5 -- --install-dir=/usr/local/bin --filename=composer \
-    mkdir -p /opt/utils/pre-init.d /opt/utils/pre-exec.d /app && \
+    && mkdir -p /opt/utils/pre-init.d /opt/utils/pre-exec.d /app \
     && mv /var/tmp/start.sh /opt/utils/start.sh \
-    chmod -R 755 /opt/utils/ /app && \
-    chown -R apache:apache /app && \
+    && chmod -R 755 /opt/utils/ /app \
+    && chown -R apache:apache /app \
     && rm -rf /var/cache/apk/* \
     && echo '[i] Setup done'
 
