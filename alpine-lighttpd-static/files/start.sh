@@ -27,7 +27,6 @@ mimetype.assign      = (
   ".png"  => "image/png",
   "" => "application/octet-stream"
 )
-static-file.exclude-extensions = ( ".fcgi", ".php", ".rb", "~", ".inc" )
 EOD
 
 if [[ "${WEBSERVER_UID}" != '' ]]; then
