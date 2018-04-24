@@ -7,13 +7,15 @@ ENV APP_PORT=80\
     WEBAPP_ROOT=\
     WEBSERVER_UID=
 
-# make sure apk-tools is up-to-date
-# php5-iconv requires gnu-libconv
-RUN apk add --no-cache --upgrade apk-tools && \
-    apk add --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/testing gnu-libiconv
 ENV LD_PRELOAD /usr/lib/preloadable_libiconv.so
 
-RUN apk add --no-cache \
+COPY files/* /var/tmp/
+
+# make sure apk-tools is up-to-date
+# php5-iconv requires gnu-libconv
+RUN apk --no-cache --update upgrade && \
+    apk add --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/testing gnu-libiconv && \
+    apk add --no-cache \
     apache2 \
     bash \
     curl \
@@ -36,14 +38,12 @@ RUN apk add --no-cache \
     && mkdir -p /run/apache2 /opt/utils/ \
     && ln -sf /usr/bin/php5 /usr/local/bin/php \
     && curl -sS https://getcomposer.org/installer | /usr/bin/php5 -- --install-dir=/usr/local/bin --filename=composer \
-    && echo '[i] Setup 1/2'
-
-COPY files/start.sh /opt/utils/
-
-RUN mkdir -p /opt/utils/pre-init.d /opt/utils/pre-exec.d /app && \
+    mkdir -p /opt/utils/pre-init.d /opt/utils/pre-exec.d /app && \
+    && mv /var/tmp/start.sh /opt/utils/start.sh \
     chmod -R 755 /opt/utils/ /app && \
     chown -R apache:apache /app && \
-    echo '[i] Setup 2/2'
+    && rm -rf /var/cache/apk/* \
+    && echo '[i] Setup done'
 
 EXPOSE $APP_PORT
 
