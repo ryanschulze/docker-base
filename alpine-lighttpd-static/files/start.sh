@@ -23,8 +23,14 @@ mimetype.assign      = (
   ".js"   => "application/x-javascript",
   ".jpg"  => "image/jpeg",
   ".jpeg" => "image/jpeg",
+  ".json" => "application/json",	
   ".gif"  => "image/gif",
   ".png"  => "image/png",
+  ".svg"  => "image/svg+xml",
+  ".txt"  => "text/plain",	
+  ".xml"  => "application/xml",
+  ".zip"  => "application/zip",
+  ".gz"   => "application/x-gzip",	
   "" => "application/octet-stream"
 )
 EOD
