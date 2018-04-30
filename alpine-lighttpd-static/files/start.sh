@@ -17,20 +17,19 @@ server.errorlog	     = "/dev/stdout"
 dir-listing.activate = "disable"
 index-file.names     = ( "index.html" )
 mimetype.assign      = (
-  ".html" => "text/html",
-  ".txt"  => "text/plain",
   ".css"  => "text/css",
-  ".js"   => "application/x-javascript",
+  ".gif"  => "image/gif",
+  ".gz"   => "application/x-gzip",	
+  ".html" => "text/html",
   ".jpg"  => "image/jpeg",
   ".jpeg" => "image/jpeg",
+  ".js"   => "application/x-javascript",
   ".json" => "application/json",	
-  ".gif"  => "image/gif",
   ".png"  => "image/png",
   ".svg"  => "image/svg+xml",
-  ".txt"  => "text/plain",	
+  ".txt"  => "text/plain",
   ".xml"  => "application/xml",
   ".zip"  => "application/zip",
-  ".gz"   => "application/x-gzip",	
   "" => "application/octet-stream"
 )
 EOD
