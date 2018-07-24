@@ -1,4 +1,4 @@
-FROM alpine:3.7
+FROM alpine:3.8
 LABEL maintainer="Ryan Schulze - https://github.com/ryanschulze"
 LABEL description="A basic apache/php5 image using alpine 3.7"
 
