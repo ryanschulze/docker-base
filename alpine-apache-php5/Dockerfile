@@ -1,6 +1,6 @@
 FROM alpine:3.8
 LABEL maintainer="Ryan Schulze - https://github.com/ryanschulze"
-LABEL description="A basic apache/php5 image using alpine 3.7"
+LABEL description="A basic apache/php5 image using alpine 3.8"
 
 # env variables required during build / start
 ENV APP_PORT=80\
@@ -20,7 +20,6 @@ RUN apk --no-cache --update upgrade && \
     bash \
     curl \
     php5-apache2 \
-    php5-cli \
     php5-ctype \
     php5-curl \
     php5-dom \
@@ -35,9 +34,10 @@ RUN apk --no-cache --update upgrade && \
     php5-xml \
     php5-zlib \
     shadow \
+    && apk add --no-cache add php5-cli \
     && mkdir -p /run/apache2 /opt/utils/ \
     && ln -sf /usr/bin/php5 /usr/local/bin/php \
-    && curl -sS https://getcomposer.org/installer | /usr/bin/php5 -- --install-dir=/usr/local/bin --filename=composer \
+    && curl -sS https://getcomposer.org/installer | /usr/local/bin/php -- --install-dir=/usr/local/bin --filename=composer \
     && mkdir -p /opt/utils/pre-init.d /opt/utils/pre-exec.d /app \
     && mv /var/tmp/start.sh /opt/utils/start.sh \
     && chmod -R 755 /opt/utils/ /app \
