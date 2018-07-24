@@ -34,7 +34,7 @@ RUN apk --no-cache --update upgrade && \
     php5-xml \
     php5-zlib \
     shadow \
-    && apk add --no-cache add php5-cli \
+    && apk add --no-cache php5-cli \
     && mkdir -p /run/apache2 /opt/utils/ \
     && ln -sf /usr/bin/php5 /usr/local/bin/php \
     && curl -sS https://getcomposer.org/installer | /usr/local/bin/php -- --install-dir=/usr/local/bin --filename=composer \
