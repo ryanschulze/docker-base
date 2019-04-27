@@ -1,4 +1,4 @@
-FROM alpine:latest
+FROM alpine:3.7
 LABEL maintainer="Ryan Schulze - https://github.com/ryanschulze"
 LABEL description="A basic apache/php5 image using alpine 3.7"
 
@@ -14,7 +14,7 @@ COPY files/* /var/tmp/
 # make sure apk-tools is up-to-date
 # php5-iconv requires gnu-libconv
 RUN apk --no-cache --update upgrade && \
-    apk add --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/testing gnu-libiconv && \
+    apk add --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/community gnu-libiconv && \
     apk add --no-cache \
     apache2 \
     bash \
